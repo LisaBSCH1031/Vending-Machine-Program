@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Capstone
@@ -35,6 +36,7 @@ namespace Capstone
                         Console.WriteLine("Enjoy your treat!");
                         return;
                     case "4": //TODO: Add sales report
+                        SalesReport(vm);
                         break;
                     default:
                         break;
@@ -82,6 +84,27 @@ namespace Capstone
 
             }
         }
+        public void SalesReport(VendingMachine vm)
+        {
+            string body = string.Empty;
+            double totalSales = 0;
+            string timeStamp = DateTime.Now.ToString();
+            timeStamp = timeStamp.Replace("/", "_");
+            timeStamp = timeStamp.Replace(":", "_");
+            timeStamp = timeStamp.Replace(" ", "-");
+            string path = $"{timeStamp} OutputSalesReport.txt";
+            foreach(var kvp in vm.slotQuantities)
+            {
+                body += ($"{vm.slotItems[kvp.Key].Name}|{5 - vm.slotQuantities[kvp.Key]} \n");
+                totalSales += vm.slotItems[kvp.Key].Price * (5 - vm.slotQuantities[kvp.Key]);
+            }
+            body += ($"\r\n Total Sales: {totalSales:C}");
+            using(StreamWriter sr = new StreamWriter(path))
+            {
+                sr.Write(body);
+            }
+        }
+        
 
     }
 }
