@@ -13,12 +13,18 @@ namespace Capstone
 
             vendingMachine.StockItems();
 
-            // TODO: USE FOR DISPLAYING CURRENT INVENTORY
-            foreach (var item in vendingMachine.slotItems)
-            {
-                Console.WriteLine($"Slot: {item.Key}, Item: {item.Value.Name}, Quantity: {vendingMachine.slotQuantities[item.Key]}");
-            }
+            vendingMachine.DisplayCurrentInventory();
 
+            // manual dispense test
+            vendingMachine.Balance = 100.00;
+            vendingMachine.Dispense("A1");
+            vendingMachine.Dispense("A1");
+            vendingMachine.Dispense("A1");
+            vendingMachine.Dispense("A1");
+            vendingMachine.Dispense("A1");
+            vendingMachine.Dispense("A1");
+            vendingMachine.Dispense("A1");
+            vendingMachine.DisplayCurrentInventory();
         }
     }
 }

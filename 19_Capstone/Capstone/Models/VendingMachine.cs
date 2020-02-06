@@ -28,6 +28,7 @@ namespace Capstone.Models
         /// <param name="slot">The slot to be dispensed from.</param>
         public void Dispense(string slot)
         {
+            Console.WriteLine($"Attempting to dispense item in slot {slot}...");
             bool sufficientBalance = DeductCostFromBalance(slot);
             if (!sufficientBalance)
             {
@@ -37,13 +38,14 @@ namespace Capstone.Models
             bool slotDecreased = DecreaseSlot(slot);
             if (!slotDecreased)
             {
-                Console.WriteLine("Slot is out of stock.");
+                Console.WriteLine($"Slot {slot} is out of stock.\r\n");
                 return;
             }
             Console.WriteLine($"Item name: {slotItems[slot].Name}");
-            Console.WriteLine($"Item price: {slotItems[slot].Price}");
-            Console.WriteLine($"Balance remaining: {this.Balance}");
+            Console.WriteLine($"Item price: {slotItems[slot].Price:C}");
+            Console.WriteLine($"Balance remaining: {this.Balance:C}");
             slotItems[slot].DispenseMessage();
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -101,6 +103,15 @@ namespace Capstone.Models
         {
             int quantity = slotQuantities[slot];
             return quantity;
+        }
+
+        public void DisplayCurrentInventory()
+        {
+            foreach (var item in this.slotItems)
+            {
+                Console.WriteLine($"Slot: {item.Key}, Item: {item.Value.Name}, Quantity: {this.slotQuantities[item.Key]}");
+            }
+            Console.WriteLine();
         }
 
         public void StockItems()
