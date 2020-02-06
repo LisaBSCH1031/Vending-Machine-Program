@@ -40,5 +40,22 @@ namespace CapstoneTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [DataTestMethod]
+        [DataRow(1, 0.0, 1.0)]
+        [DataRow(1, 100.0, 101.0)]
+        [DataRow(3, 5.10, 5.10)]
+        public void FeedMoneyTest(int bill, double startBal, double expected)
+        {
+            VendingMachine vm = new VendingMachine();
+
+            vm.Balance = startBal;
+
+            vm.FeedMoney(bill);
+
+            double actual = vm.Balance;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

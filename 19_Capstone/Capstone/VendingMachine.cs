@@ -106,6 +106,9 @@ namespace Capstone
             return quantity;
         }
 
+        /// <summary>
+        /// Displays the current inventory.
+        /// </summary>
         public void DisplayCurrentInventory()
         {
             foreach (var item in this.slotItems)
@@ -115,6 +118,10 @@ namespace Capstone
             Console.WriteLine();
         }
 
+
+        /// <summary>
+        /// Stocks the vending machine with the items in the 'vendingmachine.csv' file.
+        /// </summary>
         public void StockItems()
         {
             //read csv file and split by line
@@ -163,6 +170,37 @@ namespace Capstone
                     default:
                         break;
                 }
+            }
+        }
+
+        public void FeedMoney(int bill)
+        {
+            switch (bill)
+            {
+                case 1:
+                    this.Balance += 1.0;
+                    break;
+                case 2:
+                    this.Balance += 2.0;
+                    break;
+                case 5:
+                    this.Balance += 5.0;
+                    break;
+                case 10:
+                    this.Balance += 10.0;
+                    break;
+                case 20:
+                    this.Balance += 20.0;
+                    break;
+                case 50:
+                    this.Balance += 50.0;
+                    break;
+                case 100:
+                    this.Balance += 100.0;
+                    break;
+                default:
+                    Console.WriteLine("Error: invalid bill. A valid dollar bill must be entered.");
+                    break;
             }
         }
     }
