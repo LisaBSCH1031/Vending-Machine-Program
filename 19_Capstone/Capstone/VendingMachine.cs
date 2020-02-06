@@ -30,17 +30,20 @@ namespace Capstone
         public void Dispense(string slot)
         {
             Console.WriteLine($"Attempting to dispense item in slot {slot}...");
-            bool sufficientBalance = DeductCostFromBalance(slot);
+            
             if (!this.slotItems.ContainsKey(slot))
             {
                 Console.WriteLine("An invalid slot code has been entered.");
                 return;
             }
+
+            bool sufficientBalance = DeductCostFromBalance(slot);
             if (!sufficientBalance)
             {
                 Console.WriteLine("Insufficient balance.");
                 return;
             }
+
             bool slotDecreased = DecreaseSlot(slot);
             if (!slotDecreased)
             {
