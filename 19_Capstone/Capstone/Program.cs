@@ -9,13 +9,8 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
-            VendingMachine vendingMachine = new VendingMachine();
-
-            vendingMachine.StockItems();
-
-            vendingMachine.DisplayCurrentInventory();
-
-            
+            VendingManager vmr = new VendingManager();
+            vmr.Run();
         }
     }
 }
