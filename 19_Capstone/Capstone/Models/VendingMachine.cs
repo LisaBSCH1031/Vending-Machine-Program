@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Capstone.Models
@@ -99,6 +101,57 @@ namespace Capstone.Models
         {
             int quantity = slotQuantities[slot];
             return quantity;
+        }
+
+        public void StockItems()
+        {
+            //read csv file and split by line
+            string filename = "vendingmachine.csv";
+            List<string> allWords = new List<string>();
+            using (StreamReader sr = new StreamReader(filename))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] words = line.Split("\n");
+                    allWords.AddRange(words);
+
+                }
+            }
+            //join lines with ',' and then split and create into array
+            string newWordStr = string.Join(",", allWords);
+            string[] splitByLine = newWordStr.Split(",");
+
+            //loop through and assign array values to variables
+            for (int i = 0; i < splitByLine.Length; i++)
+            {
+                string[] splitByPipe = splitByLine[i].Split("|");
+                string slot = splitByPipe[0];
+                string itemName = splitByPipe[1];
+                string itemPrice = splitByPipe[2];
+                double itemPriceInt = double.Parse(itemPrice);
+                string itemType = splitByPipe[3];
+                slotQuantities[slot] = 5;
+
+                // make a new VendingItem of the proper type to hold the data
+                switch (itemType)
+                {
+                    case "Candy":
+                        slotItems[slot] = new Candy(itemName, itemPriceInt);
+                        break;
+                    case "Chip":
+                        slotItems[slot] = new Chip(itemName, itemPriceInt);
+                        break;
+                    case "Drink":
+                        slotItems[slot] = new Drink(itemName, itemPriceInt);
+                        break;
+                    case "Gum":
+                        slotItems[slot] = new Gum(itemName, itemPriceInt);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }
