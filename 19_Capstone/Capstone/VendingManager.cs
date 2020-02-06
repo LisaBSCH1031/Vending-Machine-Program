@@ -48,7 +48,7 @@ namespace Capstone
             Console.WriteLine("(2) Select Product");
             Console.WriteLine("(3) Finish Transaction");
             Console.WriteLine();
-            Console.WriteLine($"Current Money Provided: {vm.Balance}");
+            Console.WriteLine($"Current Money Provided: {vm.Balance:C}");
         }
 
         public void EnterPurchaseMenu(VendingMachine vm)
@@ -74,7 +74,7 @@ namespace Capstone
                         break;
                     case "3":
                         Console.WriteLine("Thank you for your patronage!");
-                        Console.WriteLine($"Your change is {vm.GiveChange(vm.Balance)}.");
+                        Console.WriteLine($"Your change is {vm.GiveChange(vm.Balance):C}."); 
                         return;
                     default:
                         break;

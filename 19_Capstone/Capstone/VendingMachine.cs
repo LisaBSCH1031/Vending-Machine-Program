@@ -61,6 +61,7 @@ namespace Capstone
             Console.WriteLine($"Balance remaining: {this.Balance:C}");
             slotItems[slot].DispenseMessage();
             Console.WriteLine();
+            // TODO 01: Dispense - write to Log.txt
         }
 
         /// <summary>
@@ -104,9 +105,20 @@ namespace Capstone
         /// <returns>Change to be dispensed.</returns>
         public double GiveChange(double balance) // TODO: change needs to be given in coins
         {
-            double change = balance;
+            double change = balance; // TODO 03: GiveChange - write to Log.txt
             this.Balance = 0.0;
             return change;
+        }
+
+        public void WriteToLog(string input)
+        {
+            // TODO 04: Add write to log functionality
+
+            // get timestamp
+
+            // concat timestamp and input string
+
+            // StreamWriter 'using' statement
         }
 
         /// <summary>
@@ -191,7 +203,7 @@ namespace Capstone
         /// Feeds a valid dollar bill type into the machine and updates the balance. If invalid bill, balances stays the same.
         /// </summary>
         /// <param name="bill">The integer amount of dollars to be fed in.</param>
-        public void FeedMoney(int bill)
+        public void FeedMoney(int bill) // TODO 02: FeedMoney - write to Log.txt
         {
             switch (bill)
             {
