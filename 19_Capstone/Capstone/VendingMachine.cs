@@ -30,7 +30,11 @@ namespace Capstone
         public void Dispense(string slot)
         {
             Console.WriteLine($"Attempting to dispense item in slot {slot}...");
-            
+            if (slot == string.Empty)
+            {
+                Console.WriteLine("Invalid entry.");
+                return;
+            }
             if (!this.slotItems.ContainsKey(slot))
             {
                 Console.WriteLine("An invalid slot code has been entered.");
