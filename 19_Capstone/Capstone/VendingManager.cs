@@ -37,6 +37,7 @@ namespace Capstone
                         return;
                     case "4": //TODO: Add sales report
                         SalesReport(vm);
+                        Console.WriteLine("Sales report generated.\r\n");
                         break;
                     default:
                         break;

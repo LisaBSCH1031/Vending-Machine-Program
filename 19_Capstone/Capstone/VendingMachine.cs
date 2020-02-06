@@ -146,7 +146,7 @@ namespace Capstone
         {
             foreach (var item in this.slotItems)
             {
-                Console.WriteLine($"Slot: {item.Key}, Item: {item.Value.Name}, Quantity: {this.slotQuantities[item.Key]}");
+                Console.WriteLine($"Slot: {item.Key}, Item: {item.Value.Name}, Price: {item.Value.Price:C}, Quantity: {this.slotQuantities[item.Key]}");
             }
             Console.WriteLine();
         }
