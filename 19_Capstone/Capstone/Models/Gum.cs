@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Capstone.Models
 {
-    public class Candy : VendingItem
+    class Gum : VendingItem
     {
-        public Candy(string name, double price) : base(name, price)
+        public Gum(string name, double price) : base(name, price)
         {
         }
 
         public override void DispenseMessage()
         {
-            Console.WriteLine("Munch Munch, Yum!");
+            Console.WriteLine("Chew Chew, Yum!");
         }
     }
 }
