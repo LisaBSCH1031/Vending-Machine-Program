@@ -173,6 +173,10 @@ namespace Capstone
             }
         }
 
+        /// <summary>
+        /// Feeds a valid dollar bill type into the machine and updates the balance. If invalid bill, balances stays the same.
+        /// </summary>
+        /// <param name="bill">The integer amount of dollars to be fed in.</param>
         public void FeedMoney(int bill)
         {
             switch (bill)
