@@ -41,6 +41,13 @@ namespace Capstone
                 return;
             }
 
+            bool slotDecreased = DecreaseSlot(slot);
+            if (!slotDecreased)
+            {
+                Console.WriteLine($"Slot {slot} is out of stock.\r\n");
+                return;
+            }
+
             bool sufficientBalance = DeductCostFromBalance(slot);
             if (!sufficientBalance)
             {
@@ -48,12 +55,7 @@ namespace Capstone
                 return;
             }
 
-            bool slotDecreased = DecreaseSlot(slot);
-            if (!slotDecreased)
-            {
-                Console.WriteLine($"Slot {slot} is out of stock.\r\n");
-                return;
-            }
+            
             Console.WriteLine($"Item name: {slotItems[slot].Name}");
             Console.WriteLine($"Item price: {slotItems[slot].Price:C}");
             Console.WriteLine($"Balance remaining: {this.Balance:C}");
