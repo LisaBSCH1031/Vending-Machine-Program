@@ -73,6 +73,8 @@ namespace Capstone
                         vm.Dispense(input1);
                         break;
                     case "3":
+                        Console.WriteLine("Thank you for your patronage!");
+                        Console.WriteLine($"Your change is {vm.GiveChange(vm.Balance)}.");
                         return;
                     default:
                         break;
