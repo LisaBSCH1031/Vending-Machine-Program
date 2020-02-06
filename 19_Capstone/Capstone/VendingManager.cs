@@ -70,6 +70,7 @@ namespace Capstone
                         vm.DisplayCurrentInventory();
                         Console.WriteLine("Please enter a selection");
                         string input1 = Console.ReadLine();
+                        vm.Dispense(input1);
                         break;
                     case "3":
                         return;
