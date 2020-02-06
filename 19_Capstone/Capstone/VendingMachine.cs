@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Capstone.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Capstone.Models
+namespace Capstone
 {
     public class VendingMachine
     {
