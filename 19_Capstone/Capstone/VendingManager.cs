@@ -12,7 +12,9 @@ namespace Capstone
         public void DisplayMainMenu()
         {
             Console.Clear();
+            Program.SetRandomColor();
             Console.WriteLine(FiggleFonts.Standard.Render("Main Menu"));
+            Console.ResetColor();
             Console.WriteLine("(1) Display Vending Machine Items");
             Console.WriteLine("(2) Purchase");
             Console.WriteLine("(3) Exit");
@@ -54,7 +56,9 @@ namespace Capstone
         public void DisplayPurchaseMenu(VendingMachine vm)
         {
             Console.Clear();
+            Program.SetRandomColor();
             Console.WriteLine(FiggleFonts.Standard.Render("Purchase Menu"));
+            Console.ResetColor();
             Console.WriteLine("(1) Feed Money");
             Console.WriteLine("(2) Select Product");
             Console.WriteLine("(3) Finish Transaction");
