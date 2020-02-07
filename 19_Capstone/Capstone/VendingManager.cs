@@ -11,6 +11,7 @@ namespace Capstone
 
         public void DisplayMainMenu()
         {
+            Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("Main Menu"));
             Console.WriteLine("(1) Display Vending Machine Items");
             Console.WriteLine("(2) Purchase");
@@ -40,15 +41,19 @@ namespace Capstone
                     case "4": //TODO: Add sales report
                         SalesReport(vm);
                         Console.WriteLine("Sales report generated.\r\n");
+                        
                         break;
                     default:
                         break;
                 }
+                Console.WriteLine("Press enter to continue.");
+                Console.ReadLine();
             }
         }
 
         public void DisplayPurchaseMenu(VendingMachine vm)
         {
+            Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("Purchase Menu"));
             Console.WriteLine("(1) Feed Money");
             Console.WriteLine("(2) Select Product");
@@ -69,14 +74,21 @@ namespace Capstone
                     case "1":
                         Console.WriteLine("Enter the amount you would like to add in whole dollars");
                         string input = Console.ReadLine();
-                        int amt = int.Parse(input);
+                        int amt;
+                        bool didParseSucceed = int.TryParse(input, out amt);
+                        if (!didParseSucceed)
+                        {
+                            Console.WriteLine("Invalid entry. Please try again.");
+                            break;
+                        }
                         vm.FeedMoney(amt);
                         break;
                     case "2":
                         vm.DisplayCurrentInventory();
                         Console.WriteLine("Please enter a selection");
-                        string input1 = Console.ReadLine();
+                        string input1 = Console.ReadLine().ToUpper();
                         vm.Dispense(input1);
+                        
                         break;
                     case "3":
                         Console.WriteLine("Thank you for your patronage!");
@@ -85,6 +97,8 @@ namespace Capstone
                     default:
                         break;
                 }
+                Console.WriteLine("Press enter to continue.");
+                Console.ReadLine();
 
             }
         }
