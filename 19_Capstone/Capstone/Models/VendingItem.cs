@@ -6,6 +6,7 @@ namespace Capstone.Models
 {
     public abstract class VendingItem
     {
+        public ConsoleColor Color { get; set; }
         public string Name { get; protected set; }
         public double Price { get; protected set; }
         public VendingItem(string name, double price)

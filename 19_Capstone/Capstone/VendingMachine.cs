@@ -144,11 +144,27 @@ namespace Capstone
         /// </summary>
         public void DisplayCurrentInventory()
         {
-            foreach (var item in this.slotItems)
+            Console.WriteLine($"{"Slot", -6}|{"Name",-20}|{"Price",-8}|{"Quantity",-10}");
+            Console.WriteLine("-------------------------------------------------");
+            foreach (var kvp in this.slotItems)
             {
-                Console.WriteLine($"Slot: {item.Key}, Item: {item.Value.Name}, Price: {item.Value.Price:C}, Quantity: {this.slotQuantities[item.Key]}");
+                Console.ForegroundColor = kvp.Value.Color; // TODO: change color based on type of item
+                Console.WriteLine($"{kvp.Key, -6}|{kvp.Value.Name, -20}|{kvp.Value.Price, -8:C}|{this.slotQuantities[kvp.Key], -10}");
+                Console.ResetColor();
             }
             Console.WriteLine();
+            Console.Write("Color key: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Yellow = Chips, ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Blue = Candy, ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("Red = Drinks, ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Green = Gum");
+            Console.WriteLine();
+            Console.ResetColor();
+
         }
 
 
