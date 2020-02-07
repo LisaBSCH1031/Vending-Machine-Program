@@ -229,6 +229,14 @@ namespace Capstone
         public void FeedMoney(int bill) 
         {
             bool feedSuccess = true;
+            Random randomBreak = new Random();
+            int rmd = randomBreak.Next(1, 100);
+            if (rmd == 83)
+            {
+                Console.WriteLine("Unlucky Customer! Your bill has been eaten!");
+                return;
+            }
+
             switch (bill)
             {
                 case 1:
@@ -259,6 +267,10 @@ namespace Capstone
             }
             if (feedSuccess)
             {
+                Console.WriteLine();
+                Console.WriteLine($"{bill:C} has been added to your balance.");
+                Console.WriteLine();
+
                 WriteToLog($"FEED MONEY: {bill:C} {this.Balance:C}");
             }
         }
