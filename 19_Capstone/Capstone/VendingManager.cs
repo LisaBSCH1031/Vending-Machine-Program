@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Figgle;
 
 namespace Capstone
 {
@@ -10,6 +11,7 @@ namespace Capstone
 
         public void DisplayMainMenu()
         {
+            Console.WriteLine(FiggleFonts.Standard.Render("Main Menu"));
             Console.WriteLine("(1) Display Vending Machine Items");
             Console.WriteLine("(2) Purchase");
             Console.WriteLine("(3) Exit");
@@ -47,6 +49,7 @@ namespace Capstone
 
         public void DisplayPurchaseMenu(VendingMachine vm)
         {
+            Console.WriteLine(FiggleFonts.Standard.Render("Purchase Menu"));
             Console.WriteLine("(1) Feed Money");
             Console.WriteLine("(2) Select Product");
             Console.WriteLine("(3) Finish Transaction");
@@ -96,32 +99,35 @@ namespace Capstone
             numQ += dollars * 4; //number of quarters
 
             double cents = change - dollars; //amt of cents
-            cents = Math.Round(cents, 2); //amt of cents rounded to 2 places
-            string centString = cents.ToString(); //cents into string
-            string subCentTen = centString.Substring(2, 1); //isolate tens place
-            string subCentFive = centString.Substring(3, 1); //isolate fives place
-            if (cents % .25 == 0) //if cents 25, 20, 75
+            if (cents != 0.0)
             {
-                numD = 0;
-                numN = 0;
-                numQ += (int)(cents / .25); //add that # of quarters to numQ
-            }
-            else if ((cents - .25) != 0) //if cents-25 has a balance and that balance 
-            {
-                numQ += (int)(cents / 25); //add whole number to quarters
-                cents = (cents - 25);
-                string centString1 = cents.ToString(); //cents into string
-                string subCentTen1 = centString1.Substring(2, 1); //isolate tens place
-                string subCentFive1 = centString1.Substring(3, 1); //isolate fives place
-                if (subCentFive == "5")
+                cents = Math.Round(cents, 2); //amt of cents rounded to 2 places
+                string centString = cents.ToString(); //cents into string
+                string subCentTen = centString.Substring(2, 1); //isolate tens place
+                string subCentFive = centString.Substring(3, 1); //isolate fives place
+                if (cents % .25 == 0) //if cents 25, 20, 75
                 {
-                    numN = 1;
-                }
-                else
-                {
+                    numD = 0;
                     numN = 0;
+                    numQ += (int)(cents / .25); //add that # of quarters to numQ
                 }
-                numD = int.Parse(subCentTen);
+                else if ((cents - .25) != 0) //if cents-25 has a balance and that balance 
+                {
+                    numQ += (int)(cents / 25); //add whole number to quarters
+                    cents = (cents - 25);
+                    string centString1 = cents.ToString(); //cents into string
+                    string subCentTen1 = centString1.Substring(2, 1); //isolate tens place
+                    string subCentFive1 = centString1.Substring(3, 1); //isolate fives place
+                    if (subCentFive == "5")
+                    {
+                        numN = 1;
+                    }
+                    else
+                    {
+                        numN = 0;
+                    }
+                    numD = int.Parse(subCentTen);
+                } 
             }
             Console.WriteLine($"Your change is {numQ} Quarters, {numD} Dimes, and {numN} Nickels totaling {change:C}.");
         }
