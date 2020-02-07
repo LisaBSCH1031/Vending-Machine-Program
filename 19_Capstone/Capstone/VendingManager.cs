@@ -92,7 +92,8 @@ namespace Capstone
                         break;
                     case "3":
                         Console.WriteLine("Thank you for your patronage!");
-                        ChangeIntoQuarDimNic(vm);
+                        (int numQ, int numD, int numN) = ChangeIntoQuarDimNic(vm);
+                        Console.WriteLine($"Your change is {numQ} Quarters, {numD} Dimes, and {numN} Nickels.");
                         return;
                     default:
                         break;
@@ -103,48 +104,43 @@ namespace Capstone
             }
         }
 
-        public void ChangeIntoQuarDimNic(VendingMachine vm)
+        public (int Q, int D, int N) ChangeIntoQuarDimNic(VendingMachine vm)
         {
             double change = vm.GiveChange(vm.Balance);
-            int numQ = 0;
-            int numD = 0;
-            int numN = 0;
-            int dollars = (int)change; //whole number
-            numQ += dollars * 4; //number of quarters
-
-            double cents = change - dollars; //amt of cents
-            if (cents != 0.0)
-            {
-                cents = Math.Round(cents, 2); //amt of cents rounded to 2 places
-                string centString = cents.ToString(); //cents into string
-                string subCentTen = centString.Substring(2, 1); //isolate tens place
-                string subCentFive = centString.Substring(3, 1); //isolate fives place
-                if (cents % .25 == 0) //if cents 25, 20, 75
-                {
-                    numD = 0;
-                    numN = 0;
-                    numQ += (int)(cents / .25); //add that # of quarters to numQ
-                }
-                else if ((cents - .25) != 0) //if cents-25 has a balance and that balance 
-                {
-                    numQ += (int)(cents / 25); //add whole number to quarters
-                    cents = (cents - 25);
-                    string centString1 = cents.ToString(); //cents into string
-                    string subCentTen1 = centString1.Substring(2, 1); //isolate tens place
-                    string subCentFive1 = centString1.Substring(3, 1); //isolate fives place
-                    if (subCentFive == "5")
-                    {
-                        numN = 1;
-                    }
-                    else
-                    {
-                        numN = 0;
-                    }
-                    numD = int.Parse(subCentTen);
-                } 
-            }
-            Console.WriteLine($"Your change is {numQ} Quarters, {numD} Dimes, and {numN} Nickels totaling {change:C}.");
+            int numQ = 0, numD = 0, numN = 0;
+            int intCents = GetIntCents(change);
+            int remainder;
+            (numQ, remainder) = GetQuarters(intCents);
+            (numD, numN) = GetDimesNickels(remainder);
+            return (numQ, numD, numN);
         }
+
+        public int GetIntCents(double change)
+        {
+            double cents = change * 100;
+            int result = (int)(Math.Round(cents));
+            return result;
+        }
+
+        public (int numQ, int remainder) GetQuarters(int intCents)
+        {
+            int numQ = intCents / 25;
+            int remainder = intCents % 25;
+            return (numQ, remainder);
+        }
+
+        public (int numD, int numN) GetDimesNickels (int remainder)
+        {
+            int numD = 0, numN = 0;
+            numD = remainder / 10;
+            int remainder2 = remainder % 10;
+            numN = remainder2 / 5;
+            return (numD, numN);
+        }
+
+
+
+
         public void SalesReport(VendingMachine vm)
         {
             string body = string.Empty;
